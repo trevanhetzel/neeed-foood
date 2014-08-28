@@ -1,0 +1,25 @@
+.sentence-filter {
+	margin: 3.5em 0 0 0;
+	font-size: 2em;
+	font-weight: 300;
+	color: $white;
+}
+
+.sf-contain {
+	display: inline-block;
+	padding: .25em 0 0;
+}
+
+.sf-drop-contain {
+	position: relative;
+}
+
+.sf-trigger {
+	display: inline-block;
+	padding: 0 .325em .063em;
+	margin: 0 .063em 0 0;
+	background: rgba(0,0,0,.15);
+	color: $primary;
+	font-weight: 400;
+	text-decoration: none;
+}

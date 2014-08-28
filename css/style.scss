@@ -1,0 +1,27 @@
+// Normalize
+@import "global/normalize";
+
+// Variables & Mixins
+@import "global/variables";
+@import "global/mixins";
+
+// Utility/helper classes
+@import "global/utility";
+
+// Base styles
+body {
+	font-family: $sans;
+	color: $text;
+	background: $white;
+}
+
+.wrapper {
+	position: relative;
+	max-width: 75em;
+	margin: 0 auto;
+	padding: 0 2.5em;
+}
+
+// Modules
+@import "module/header";
+@import "module/sentence-filter";

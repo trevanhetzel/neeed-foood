@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Neeed Foood</title>
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,400|PT+Serif:400,700italic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <header class="header">
+            <div class="wrapper text-center">
+                <h1 class="logo">Neeed <span class="logo-offset">Foood</span></h1>
+
+                <p class="sentence-filter">
+                    <span class="sf-contain">
+                        I need to make
+                        <span class="sf-drop-contain">
+                            <a href="#" class="sf-trigger">select course</a>.
+                        </span>
+                    </span>
+
+                    <span class="sf-contain">
+                        I’m hungry for
+                        <span class="sf-drop-contain">
+                            <a href="#" class="sf-trigger">select cuisine</a>.
+                        </span>
+                    </span>
+
+                    <span class="sf-contain">
+                        I have
+                        <span class="sf-drop-contain">
+                            <a href="#" class="sf-trigger">select time</a>.
+                        </span>
+                    </span>
+                </p>
+            </div>
+        </header>
+
+        <section class="wrapper">
+            <form id="search">
+                <label>I need to make a</label>
+                <select id="searchCourse">
+                    <option value="default">select course</option>
+                    <option value="Breakfast and Brunch">Breakfast</option>
+                    <option value="Lunch and Snacks">Lunch</option>
+                    <option value="Main Dishes">Dinner</option>
+                    <option value="Desserts">Dessert</option>
+                    <option value="Appetizers">Appetizer</option>
+                </select>
+
+                <label>I'm hungry for</label>
+                <select id="searchCuisine">
+                    <option value="default">select cuisine</option>
+                    <option value="american">American</option>
+                    <option value="asian">Asian</option>
+                    <option value="barbecue-bbq">Barbecue</option>
+                    <option value="cajun">Cajun</option>
+                    <option value="indian">Indian</option>
+                    <option value="italian">Italian</option>
+                    <option value="mexican">Mexican</option>
+                    <option value="thai">Thai</option>
+                </select>
+
+                <button type="submit">Go!</button>
+            </form>
+
+            <ul class="meal-list"></ul>
+        </section>
+
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
