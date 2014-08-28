@@ -1,17 +1,32 @@
 .sentence-filter {
-	margin: 3.5em 0 0 0;
-	font-size: 2em;
+	margin: .5em 0 0 0;
+	font-size: 1.75em;
 	font-weight: 300;
 	color: $white;
+
+	@include breakpoint(small) {
+		margin: 3.5em 0 0 0;
+		font-size: 2em;
+	}
 }
 
 .sf-contain {
-	display: inline-block;
-	padding: .25em 0 0;
+	display: block;
+	padding: .75em 0 0;
+
+	@include breakpoint(small) {
+		display: inline-block;
+		padding: .25em 0 0;
+	}
 }
 
 .sf-drop-contain {
+	display: block;
 	position: relative;
+
+	@include breakpoint(small) {
+		display: inline-block;
+	}
 }
 
 .sf-trigger {

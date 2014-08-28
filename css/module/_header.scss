@@ -1,6 +1,6 @@
 .header {
 	position: relative;
-	padding: 5.25em 0 8.875em;
+	padding: 2.5em 0 3.25em;
 	background: url(../images/hero.jpg) no-repeat center;
 	background-size: cover;
 
@@ -14,15 +14,23 @@
 		background: #26313a;
 		opacity: .97;
 	}
+
+	@include breakpoint(small) {
+		padding: 5.25em 0 8.875em;
+	}
 }
 
 .logo {
 	margin: 0;
-	font-size: 3.75em;
+	font-size: 2.25em;
 	font-family: $serif;
 	font-style: italic;
 	line-height: 1em;
 	color: $white;
+
+	@include breakpoint(small) {
+		font-size: 3.75em;
+	}
 }
 
 .logo-offset {
