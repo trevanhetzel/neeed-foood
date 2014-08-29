@@ -32,9 +32,67 @@
 .sf-trigger {
 	display: inline-block;
 	padding: 0 .325em .063em;
-	margin: 0 .063em 0 0;
 	background: rgba(0,0,0,.15);
 	color: $primary;
 	font-weight: 400;
 	text-decoration: none;
+	transition: background .2s ease;
+
+	&:hover {
+		background: #21282f;
+	}
+
+	&::after {
+		content: "";
+		float: right;
+		margin: 1em 0 0 .563em;
+		width: 1.063em;
+		height: .563em;
+		font-size: 0.571em;
+		background: url(../images/icon-chevron.png) no-repeat;
+		transition: transform .2s ease;
+	}
+
+	.sf-drop--open & {
+		background: #21282f;
+
+		&::after {
+			margin-top: .875em;
+			transform: rotate(180deg);
+		}
+	}
+}
+
+.sf-drop {
+	display: none;
+	position: absolute;
+	z-index: 1;
+	margin: 0;
+	padding: 0 0 .25em;
+	width: 100%;
+	list-style: none;
+	background: #21282f;
+	font-weight: 400;
+	text-align: center;
+
+	a {
+		display: block;
+		padding: .375em .625em;
+		color: $white;
+		text-decoration: none;
+		font-size: .625em;
+
+		&:hover {
+			color: $primary;
+			background: #1c2228;
+		}
+	}
+
+	.sf-drop--open & {
+		display: block;
+	}
+
+	@include breakpoint(small) {
+		text-align: left;
+	}
 }
