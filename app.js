@@ -11,27 +11,45 @@
 		$searchCourse = $('#searchCourse'),
 		$searchCuisine = $('#searchCuisine'),
 		$mealList = $('.meal-list'),
-		$filterTrigger = $('.sf-trigger'),
-		$filterContain = $('.sf-drop-contain');
+		$filterContain = $('.sf-drop-contain'),
+		$filterItem = $('.sf-drop a'),
+		filterTrigger = '.sf-trigger',
+		dropOpen = 'sf-drop--open';
 
 	// Register events
 	self.registerEvents = function () {
-		$filterTrigger.on('click', self.sentenceFilter);
+		$(document)
+			.on('click', function () {
+				// Close all dropdowns on document click
+				$filterContain.removeClass(dropOpen);
+			})
+			.on('click', filterTrigger, self.doDropdown);
+			
+		$filterItem.on('click', self.doSearch);
 		$search.on('submit', self.doSearch);
 	};
 
-	self.sentenceFilter = function (e) {
+	self.doDropdown = function (e) {
 		e.preventDefault();
+		e.stopPropagation();
 		var $this = $(this),
 			$filterParent = $this.parent('.sf-drop-contain');
 		
-		$filterParent.toggleClass('sf-drop--open');
+		if (!$filterParent.hasClass(dropOpen)) {
+			$filterContain.removeClass(dropOpen);
+			$filterParent.addClass(dropOpen);
+		} else {
+			$filterParent.removeClass(dropOpen);
+		}
 	};
 
 	// Grab some things needed for our search
     self.doSearch = function (e) {
     	// Prevent from from submitting
 		e.preventDefault();
+
+		// Close dropdown once an item is selected
+		$filterContain.removeClass(dropOpen);
 
 		// Grab user submitted values
 		var courseVal = $searchCourse.val(),
