@@ -49,23 +49,42 @@
 			courseVal = '',
 			cuisineVal = '';
 
-		if ($this.parents(searchCourse)) {
-			courseVal = $this.data('value');
-		} else if ($this.parents(searchCuisine)) {
-			cuisineVal = $this.data('value');
-		}
-
 		// Close dropdown once an item is selected
 		$filterContain.removeClass(dropOpen);
 
 		// Replace dropdown value with currently selected
 		$this.parents().siblings(filterTrigger).text($this.text());
 
+		// Set dropdown's data value
+		$this.parents().siblings(filterTrigger).attr('data-value', $this.data('value'));
+
 		// Make this one "active"
 		$filterItem.removeClass('active');
 		$this.addClass('active');
 
-		// Do the search using value of input
+		if ($this.parents(searchCourse)) {
+			courseVal = $this.data('value');
+
+			// See if there's a Cuisine selected too
+			var $cuisineTrigger = $(searchCuisine).siblings(filterTrigger),
+				cuisineText = $cuisineTrigger.text();
+
+			if (!cuisineText == 'select cuisine') {
+				cusineVal = $cuisineTrigger.attr('data-value');
+			}
+		} else if ($this.parents(searchCuisine)) {
+			cuisineVal = $this.data('value');
+
+			// See if there's a Course selected too
+			var $courseTrigger = $(searchCourse).siblings(filterTrigger),
+				courseText = $courseTrigger.text();
+
+			if (!courseText == 'select cuisine') {
+				courseVal = $courseTrigger.attr('data-value');
+			}
+		}
+
+		// Send the request
 		self.doRequest(courseVal, cuisineVal);
     };
 
