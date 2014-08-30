@@ -10,6 +10,7 @@
 	var $search = $('#search'),
 		searchCourse = '#searchCourse',
 		searchCuisine = '#searchCuisine',
+		searchTime = '#searchTime',
 		$mealList = $('.meal-list'),
 		$filterContain = $('.sf-drop-contain'),
 		$filterItem = $('.sf-drop a'),
@@ -47,7 +48,8 @@
 		e.preventDefault();
 		var $this = $(this),
 			courseVal = '',
-			cuisineVal = '';
+			cuisineVal = '',
+			timeVal = '';
 
 		// Close dropdown once an item is selected
 		$filterContain.removeClass(dropOpen);
@@ -62,36 +64,61 @@
 		$filterItem.removeClass('active');
 		$this.addClass('active');
 
-		if ($this.parents(searchCourse)) {
-			courseVal = $this.data('value');
+		courseCheck = function () {
+			var $courseTrigger = $(searchCourse).siblings(filterTrigger),
+				courseText = $courseTrigger.text();
 
-			// See if there's a Cuisine selected too
+			if (!courseText == 'select course') {
+				courseVal = $courseTrigger.attr('data-value');
+			}
+		};
+
+		cuisineCheck = function () {
 			var $cuisineTrigger = $(searchCuisine).siblings(filterTrigger),
 				cuisineText = $cuisineTrigger.text();
 
 			if (!cuisineText == 'select cuisine') {
 				cusineVal = $cuisineTrigger.attr('data-value');
 			}
+		};
+
+		timeCheck = function () {
+			var $timeTrigger = $(searchTime).siblings(filterTrigger),
+				timeText = $timeTrigger.text();
+
+			if (!timeText == 'select time') {
+				timeVal = $timeTrigger.attr('data-value');
+			}
+		};
+
+		if ($this.parents(searchCourse)) {
+			courseVal = $this.data('value');
+
+			// See if there's a Cuisine or Time selected
+			cuisineCheck();
+			timeCheck();
 		} else if ($this.parents(searchCuisine)) {
 			cuisineVal = $this.data('value');
+			
+			// See if there's a Course or Time selected
+			courseCheck();
+			timeCheck();
+		} else if ($this.parents(searchTime)) {
+			timeVal = $this.data('value');
 
-			// See if there's a Course selected too
-			var $courseTrigger = $(searchCourse).siblings(filterTrigger),
-				courseText = $courseTrigger.text();
-
-			if (!courseText == 'select cuisine') {
-				courseVal = $courseTrigger.attr('data-value');
-			}
+			// See if there's a Course or Cuisine selected
+			courseCheck();
+			cuisineCheck();
 		}
 
 		// Send the request
-		self.doRequest(courseVal, cuisineVal);
+		self.doRequest(courseVal, cuisineVal, timeVal);
     };
 
     // Hit the Yummly API and grab recipes
-    self.doRequest = function (courseVal, cuisineVal) {
+    self.doRequest = function (courseVal, cuisineVal, timeVal) {
     	var searchRequest = $.ajax({
-			url: 'http://api.yummly.com/v1/api/recipes?_app_id=' + yummlyID + '&_app_key=' + yummlyKey + '&allowedCourse[]=course^course-' + courseVal + '&allowedCuisine[]=cuisine^cuisine-' + cuisineVal + '&maxResult=' + numResults,
+			url: 'http://api.yummly.com/v1/api/recipes?_app_id=' + yummlyID + '&_app_key=' + yummlyKey + '&allowedCourse[]=course^course-' + courseVal + '&allowedCuisine[]=cuisine^cuisine-' + cuisineVal + '&maxTotalTimeInSeconds=' + timeVal + '&maxResult=' + numResults,
 			type: 'GET',
 			dataType: 'jsonp'
 		});
