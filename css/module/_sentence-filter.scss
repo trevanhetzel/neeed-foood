@@ -31,6 +31,7 @@
 
 .sf-trigger {
 	display: inline-block;
+	width: 100%;
 	padding: 0 .325em .063em;
 	background: rgba(0,0,0,.15);
 	color: $primary;
@@ -39,7 +40,7 @@
 	transition: background .2s ease;
 
 	&:hover {
-		background: #21282f;
+		background: $blue;
 	}
 
 	&::after {
@@ -54,12 +55,16 @@
 	}
 
 	.sf-drop--open & {
-		background: #21282f;
+		background: $blue;
 
 		&::after {
 			margin-top: .875em;
 			transform: rotate(180deg);
 		}
+	}
+
+	@include breakpoint(small) {
+		width: auto;
 	}
 }
 
@@ -71,7 +76,7 @@
 	padding: 0 0 .25em;
 	width: 100%;
 	list-style: none;
-	background: #21282f;
+	background: $blue;
 	font-weight: 400;
 	text-align: center;
 
@@ -84,8 +89,12 @@
 
 		&:hover {
 			color: $primary;
-			background: #1c2228;
+			background: $blue-dark;
 		}
+	}
+
+	.active {
+		color: $primary;
 	}
 
 	.sf-drop--open & {

@@ -44,9 +44,7 @@
 
 	// Grab some things needed for our search
     self.doSearch = function (e) {
-    	// Prevent from from submitting
 		e.preventDefault();
-
 		var $this = $(this),
 			courseVal = '',
 			cuisineVal = '';
@@ -59,6 +57,13 @@
 
 		// Close dropdown once an item is selected
 		$filterContain.removeClass(dropOpen);
+
+		// Replace dropdown value with currently selected
+		$this.parents().siblings(filterTrigger).text($this.text());
+
+		// Make this one "active"
+		$filterItem.removeClass('active');
+		$this.addClass('active');
 
 		// Do the search using value of input
 		self.doRequest(courseVal, cuisineVal);
