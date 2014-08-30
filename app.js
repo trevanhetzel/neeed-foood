@@ -4,12 +4,12 @@
 	// Yummly info
 	var yummlyID = '216cd33e',
     	yummlyKey = '2396fa4ecd760e0676371861ad4d3724',
-    	numResults = 50;
+    	numResults = 12;
 
 	// Cache jQuery objects
 	var $search = $('#search'),
-		$searchCourse = $('#searchCourse'),
-		$searchCuisine = $('#searchCuisine'),
+		searchCourse = '#searchCourse',
+		searchCuisine = '#searchCuisine',
 		$mealList = $('.meal-list'),
 		$filterContain = $('.sf-drop-contain'),
 		$filterItem = $('.sf-drop a'),
@@ -26,7 +26,6 @@
 			.on('click', filterTrigger, self.doDropdown);
 			
 		$filterItem.on('click', self.doSearch);
-		$search.on('submit', self.doSearch);
 	};
 
 	self.doDropdown = function (e) {
@@ -48,17 +47,21 @@
     	// Prevent from from submitting
 		e.preventDefault();
 
+		var $this = $(this),
+			courseVal = '',
+			cuisineVal = '';
+
+		if ($this.parents(searchCourse)) {
+			courseVal = $this.data('value');
+		} else if ($this.parents(searchCuisine)) {
+			cuisineVal = $this.data('value');
+		}
+
 		// Close dropdown once an item is selected
 		$filterContain.removeClass(dropOpen);
 
-		// Grab user submitted values
-		var courseVal = $searchCourse.val(),
-			cuisineVal = $searchCuisine.val();
-
 		// Do the search using value of input
-		if (courseVal !== 'default' && cuisineVal !== 'default') {
-			self.doRequest(courseVal, cuisineVal);
-		}
+		self.doRequest(courseVal, cuisineVal);
     };
 
     // Hit the Yummly API and grab recipes
@@ -90,7 +93,11 @@
 		});
 
 		recipeRequest.done(function (res) {
-			$mealList.append('<li>' + res.name + '</li>');
+			var name = res.name,
+				image = res.images[0].hostedLargeUrl,
+				url = res.attribution.url;
+
+			$mealList.append('<li><a href="' + url + '"><img src="' + image + '"></a><h2><a href="' + url + '">' + name + '</a></h2></li>');
 		});
     };
 

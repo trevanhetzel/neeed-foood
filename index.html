@@ -19,12 +19,12 @@
                         <div class="sf-drop-contain">
                             <a href="#" class="sf-trigger">select course</a>
 
-                            <ul class="sf-drop">
-                                <li><a href="#">Breakfast</a></li>
-                                <li><a href="#">Lunch</a></li>
-                                <li><a href="#">Dinner</a></li>
-                                <li><a href="#">Dessert</a></li>
-                                <li><a href="#">Appetizer</a></li>
+                            <ul class="sf-drop" id="searchCourse">
+                                <li><a href="#" data-value="Breakfast and Brunch">Breakfast</a></li>
+                                <li><a href="#" data-value="Lunch and Snacks">Lunch</a></li>
+                                <li><a href="#" data-value="Main Dishes">Dinner</a></li>
+                                <li><a href="#" data-value="Dessert">Dessert</a></li>
+                                <li><a href="#" data-value="Appetizers">Appetizer</a></li>
                             </ul>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                         <div class="sf-drop-contain">
                             <a href="#" class="sf-trigger">select cuisine</a>
 
-                            <ul class="sf-drop">
+                            <ul class="sf-drop" id="searchCuisine">
                                 <li><a href="#">American</a></li>
                                 <li><a href="#">Asian</a></li>
                                 <li><a href="#">Barbecue</a></li>
@@ -52,7 +52,7 @@
                         <div class="sf-drop-contain">
                             <a href="#" class="sf-trigger">select time</a>
 
-                            <ul class="sf-drop">
+                            <ul class="sf-drop" id="searchTime">
                                 <li><a href="#">no time</a></li>
                                 <li><a href="#">10 minutes</a></li>
                                 <li><a href="#">30 minutes</a></li>
@@ -65,33 +65,6 @@
         </header>
 
         <section class="wrapper">
-            <form id="search">
-                <label>I need to make a</label>
-                <select id="searchCourse">
-                    <option value="default">select course</option>
-                    <option value="Breakfast and Brunch">Breakfast</option>
-                    <option value="Lunch and Snacks">Lunch</option>
-                    <option value="Main Dishes">Dinner</option>
-                    <option value="Desserts">Dessert</option>
-                    <option value="Appetizers">Appetizer</option>
-                </select>
-
-                <label>I'm hungry for</label>
-                <select id="searchCuisine">
-                    <option value="default">select cuisine</option>
-                    <option value="american">American</option>
-                    <option value="asian">Asian</option>
-                    <option value="barbecue-bbq">Barbecue</option>
-                    <option value="cajun">Cajun</option>
-                    <option value="indian">Indian</option>
-                    <option value="italian">Italian</option>
-                    <option value="mexican">Mexican</option>
-                    <option value="thai">Thai</option>
-                </select>
-
-                <button type="submit">Go!</button>
-            </form>
-
             <ul class="meal-list"></ul>
         </section>
 
