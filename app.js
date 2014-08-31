@@ -118,7 +118,10 @@
 	// Hit the Yummly API and grab recipes
 	self.doRequest = function (courseVal, cuisineVal, timeVal) {
 		var searchRequest = $.ajax({
-			url: 'http://api.yummly.com/v1/api/recipes?_app_id=' + yummlyID + '&_app_key=' + yummlyKey + '&allowedCourse[]=course^course-' + courseVal + '&allowedCuisine[]=cuisine^cuisine-' + cuisineVal + '&maxTotalTimeInSeconds=' + timeVal + '&maxResult=' + numResults,
+			url: 'http://api.yummly.com/v1/api/recipes?_app_id=' + yummlyID +
+				'&_app_key=' + yummlyKey + '&allowedCourse[]=course^course-' + courseVal +
+				'&allowedCuisine[]=cuisine^cuisine-' + cuisineVal + '&maxTotalTimeInSeconds=' +
+				timeVal + '&maxResult=' + numResults,
 			type: 'GET',
 			dataType: 'jsonp'
 		});
@@ -149,7 +152,9 @@
 				url = res.attribution.url,
 				time = res.totalTime;
 
-			$mealList.append('<li><a href="' + url + '"><img src="' + image + '"><span>' + time + '</span></a><h2><a href="' + url + '">' + name + '</a></h2></li>');
+			$mealList.append('<li><a href="' + url + '">' +
+				'<img src="' + image + '"><span>' + time + '</span></a>' +
+				'<h2><a href="' + url + '">' + name + '</a></h2></li>');
 		});
 	};
 
