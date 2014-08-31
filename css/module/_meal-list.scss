@@ -54,3 +54,17 @@
 		}
 	}
 }
+
+.ml-contain {
+	position: relative;
+
+	span {
+		display: block;
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		padding: .25em .75em;
+		font-size: .875em;
+		background: $white;
+	}
+}

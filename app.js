@@ -152,7 +152,7 @@
 				url = res.attribution.url,
 				time = res.totalTime;
 
-			$mealList.append('<li><a href="' + url + '">' +
+			$mealList.append('<li><a href="' + url + '" class="ml-contain">' +
 				'<img src="' + image + '"><span>' + time + '</span></a>' +
 				'<h2><a href="' + url + '">' + name + '</a></h2></li>');
 		});
