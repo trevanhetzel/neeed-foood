@@ -38,11 +38,44 @@ module.exports = function (grunt) {
             }
         },
 
+        /**
+         * JSBeautifier
+         */
+        jsbeautifier: {
+            dev: {
+                src: [ 'app.js'],
+                options: {
+                    config: '.jsbeautifyrc'
+                }
+            }
+        },
+
+        /**
+         * JSHint
+         */
+        jshint: {
+            dev: {
+                options: {
+                    jshintrc: '.jshintrc'
+                },
+                files: {
+                    src: ['app.js']
+                }
+            }
+        },
+
 
         /**
          * Watch
          */
         watch: {
+            scripts: {
+                files: ['app.js'],
+                tasks: ['jshint'],
+                options: {
+                    spawn: false
+                }
+            },
             css: {
                 files: [
                     'css/style.scss',
@@ -59,8 +92,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-jsbeautifier');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     // Register Tasks
-    grunt.registerTask('default', [ 'sass', 'autoprefixer' ]);
+    grunt.registerTask('default', [ 'sass', 'autoprefixer', 'jsbeautifier', 'jshint' ]);
 
 };

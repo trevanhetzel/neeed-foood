@@ -3,8 +3,8 @@
 
 	// Yummly info
 	var yummlyID = '216cd33e',
-    	yummlyKey = '2396fa4ecd760e0676371861ad4d3724',
-    	numResults = 12;
+		yummlyKey = '2396fa4ecd760e0676371861ad4d3724',
+		numResults = 12;
 
 	// Cache jQuery objects
 	var $search = $('#search'),
@@ -25,7 +25,7 @@
 				$filterContain.removeClass(dropOpen);
 			})
 			.on('click', filterTrigger, self.doDropdown);
-			
+
 		$filterItem.on('click', self.doSearch);
 	};
 
@@ -34,7 +34,7 @@
 		e.stopPropagation();
 		var $this = $(this),
 			$filterParent = $this.parent('.sf-drop-contain');
-		
+
 		if (!$filterParent.hasClass(dropOpen)) {
 			$filterContain.removeClass(dropOpen);
 			$filterParent.addClass(dropOpen);
@@ -44,7 +44,7 @@
 	};
 
 	// Grab some things needed for our search
-    self.doSearch = function (e) {
+	self.doSearch = function (e) {
 		e.preventDefault();
 		var $this = $(this),
 			courseVal = '',
@@ -64,29 +64,29 @@
 		$filterItem.removeClass('active');
 		$this.addClass('active');
 
-		courseCheck = function () {
+		var courseCheck = function () {
 			var $courseTrigger = $(searchCourse).siblings(filterTrigger),
 				courseText = $courseTrigger.text();
 
-			if (!courseText == 'select course') {
+			if (courseText !== 'select course') {
 				courseVal = $courseTrigger.attr('data-value');
 			}
 		};
 
-		cuisineCheck = function () {
+		var cuisineCheck = function () {
 			var $cuisineTrigger = $(searchCuisine).siblings(filterTrigger),
 				cuisineText = $cuisineTrigger.text();
 
-			if (!cuisineText == 'select cuisine') {
-				cusineVal = $cuisineTrigger.attr('data-value');
+			if (cuisineText !== 'select cuisine') {
+				cuisineVal = $cuisineTrigger.attr('data-value');
 			}
 		};
 
-		timeCheck = function () {
+		var timeCheck = function () {
 			var $timeTrigger = $(searchTime).siblings(filterTrigger),
 				timeText = $timeTrigger.text();
 
-			if (!timeText == 'select time') {
+			if (timeText !== 'select time') {
 				timeVal = $timeTrigger.attr('data-value');
 			}
 		};
@@ -99,7 +99,7 @@
 			timeCheck();
 		} else if ($this.parents(searchCuisine)) {
 			cuisineVal = $this.data('value');
-			
+
 			// See if there's a Course or Time selected
 			courseCheck();
 			timeCheck();
@@ -113,11 +113,11 @@
 
 		// Send the request
 		self.doRequest(courseVal, cuisineVal, timeVal);
-    };
+	};
 
-    // Hit the Yummly API and grab recipes
-    self.doRequest = function (courseVal, cuisineVal, timeVal) {
-    	var searchRequest = $.ajax({
+	// Hit the Yummly API and grab recipes
+	self.doRequest = function (courseVal, cuisineVal, timeVal) {
+		var searchRequest = $.ajax({
 			url: 'http://api.yummly.com/v1/api/recipes?_app_id=' + yummlyID + '&_app_key=' + yummlyKey + '&allowedCourse[]=course^course-' + courseVal + '&allowedCuisine[]=cuisine^cuisine-' + cuisineVal + '&maxTotalTimeInSeconds=' + timeVal + '&maxResult=' + numResults,
 			type: 'GET',
 			dataType: 'jsonp'
@@ -133,11 +133,11 @@
 				self.fetchRecipe(recipeID);
 			}
 		});
-    };
+	};
 
-    // Grab the individual recipes and spit them out
-    self.fetchRecipe = function (recipeID) {
-    	var recipeRequest = $.ajax({
+	// Grab the individual recipes and spit them out
+	self.fetchRecipe = function (recipeID) {
+		var recipeRequest = $.ajax({
 			url: 'http://api.yummly.com/v1/api/recipe/' + recipeID + '?_app_id=' + yummlyID + '&_app_key=' + yummlyKey,
 			type: 'GET',
 			dataType: 'jsonp'
@@ -146,12 +146,13 @@
 		recipeRequest.done(function (res) {
 			var name = res.name,
 				image = res.images[0].hostedLargeUrl,
-				url = res.attribution.url;
+				url = res.attribution.url,
+				time = res.totalTime;
 
-			$mealList.append('<li><a href="' + url + '"><img src="' + image + '"></a><h2><a href="' + url + '">' + name + '</a></h2></li>');
+			$mealList.append('<li><a href="' + url + '"><img src="' + image + '"><span>' + time + '</span></a><h2><a href="' + url + '">' + name + '</a></h2></li>');
 		});
-    };
+	};
 
-    self.registerEvents();
+	self.registerEvents();
 
-}) (jQuery);
+})(jQuery);
